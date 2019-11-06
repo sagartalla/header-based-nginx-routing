@@ -1,0 +1,13 @@
+map $http_x_requested_with $value {
+    default '/app/static1';
+    'com.convertify.acko' '/app/static2';
+}
+
+server {
+    listen 80;
+    root $value;
+    location /
+    {
+        add_header X-Requested-With "$http_x_requested_with";
+    }
+}
